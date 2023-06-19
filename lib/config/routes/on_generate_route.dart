@@ -3,12 +3,13 @@ import 'package:flutter_chat_app/config/theme/app_styles.dart';
 import 'package:flutter_chat_app/config/theme/app_themes.dart';
 import 'package:flutter_chat_app/core/constants/constants.dart';
 import 'package:flutter_chat_app/features/app/home/home_page.dart';
+import 'package:flutter_chat_app/features/user/presentation/pages/forget_password_page.dart';
 import 'package:flutter_chat_app/features/user/presentation/pages/sign_in_page.dart';
 import 'package:flutter_chat_app/features/user/presentation/pages/sign_up_page.dart';
 
 class OnGenerateRoute {
   static Route<dynamic>? route(RouteSettings settings) {
-    final args = settings.arguments;
+    // final args = settings.arguments;
 
     switch (settings.name) {
       case PageConst.signIn:
@@ -19,6 +20,9 @@ class OnGenerateRoute {
 
       case PageConst.home:
         return routeBuilder(const HomePage());
+
+      case PageConst.forgetPassword:
+        return routeBuilder(const ForgetPasswordPage());
 
       default:
         const NoScreenFound();
