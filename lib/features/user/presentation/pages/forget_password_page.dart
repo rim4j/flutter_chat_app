@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_app/config/theme/app_styles.dart';
 import 'package:flutter_chat_app/config/theme/app_themes.dart';
 import 'package:flutter_chat_app/core/constants/constants.dart';
 import 'package:flutter_chat_app/core/utils/custom_toast.dart';
 import 'package:flutter_chat_app/core/widgets/custom_button.dart';
+import 'package:flutter_chat_app/features/user/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter_chat_app/features/user/presentation/widgets/form_container_widget.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
@@ -26,15 +26,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backGroundColor,
-      appBar: AppBar(
-        backgroundColor: AppColors.backGroundColorBottomNav,
-        title: Text(
-          "Forget password",
-          style: fEncodeSansBold.copyWith(
-            color: AppColors.primaryColor,
-          ),
-        ),
-      ),
+      appBar: customAppBar(title: "Forget password"),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),

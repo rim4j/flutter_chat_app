@@ -40,12 +40,14 @@ class _FormContainerWidgetState extends State<FormContainerWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      height: 50,
       decoration: BoxDecoration(
         color: AppColors.secondaryColor.withOpacity(.35),
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextFormField(
-        style: fEncodeSansMedium.copyWith(color: AppColors.primaryColor),
+        style: fEncodeSansMedium.copyWith(
+            color: AppColors.primaryColor, fontSize: 18),
         controller: widget.controller,
         keyboardType: widget.inputType,
         key: widget.fieldKey,

@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_app/config/routes/on_generate_route.dart';
+import 'package:flutter_chat_app/core/blocs/tab_bar_cubit.dart/tab_bar_cubit.dart';
 import 'package:flutter_chat_app/features/app/home/home_page.dart';
 import 'package:flutter_chat_app/features/injection_container.dart' as di;
 import 'package:flutter_chat_app/features/user/presentation/cubit/auth/auth_cubit.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<AuthCubit>(
           create: (context) => di.locator<AuthCubit>()..appStarted(),
         ),
+        BlocProvider<TabBarCubit>(
+          create: (context) => TabBarCubit(),
+        ),
         BlocProvider<CredentialCubit>(
           create: (context) => di.locator<CredentialCubit>(),
         ),
@@ -42,10 +46,10 @@ class MyApp extends StatelessWidget {
               builder: (context, authState) {
                 if (authState is Authenticated) {
                   //home page
-                  return HomePage();
+                  return HomePage(uid: authState.uid);
                 } else {
                   //login page
-                  return SignInPage();
+                  return const SignInPage();
                 }
               },
             );

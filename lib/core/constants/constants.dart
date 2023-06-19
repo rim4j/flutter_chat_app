@@ -8,10 +8,12 @@ class IMAGES {
       "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/crypto%2Fsearch%20(2).png?alt=media&token=24a918f7-3564-4290-b7e4-08ff54b3c94c";
 }
 
+//firebase constants
 class FirebaseCollectionsName {
   static const users = "users";
 }
 
+//route names
 class PageConst {
   static const String signUp = "signUp";
   static const String signIn = "signIn";

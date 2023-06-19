@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/core/constants/constants.dart';
+import 'package:flutter_chat_app/core/utils/custom_toast.dart';
 import 'package:flutter_chat_app/features/user/data/models/user_model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -53,7 +55,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
         userCollection.doc(uid).set(newUser);
       } else {
-        print("user already exists");
+        toast(message: 'user already exists', backGroundColor: Colors.red);
 
         return;
       }

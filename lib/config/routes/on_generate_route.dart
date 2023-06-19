@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/config/theme/app_styles.dart';
 import 'package:flutter_chat_app/config/theme/app_themes.dart';
 import 'package:flutter_chat_app/core/constants/constants.dart';
-import 'package:flutter_chat_app/features/app/home/home_page.dart';
 import 'package:flutter_chat_app/features/user/presentation/pages/forget_password_page.dart';
 import 'package:flutter_chat_app/features/user/presentation/pages/sign_in_page.dart';
 import 'package:flutter_chat_app/features/user/presentation/pages/sign_up_page.dart';
@@ -18,14 +17,11 @@ class OnGenerateRoute {
       case PageConst.signUp:
         return routeBuilder(const SignUpPage());
 
-      case PageConst.home:
-        return routeBuilder(const HomePage());
-
       case PageConst.forgetPassword:
         return routeBuilder(const ForgetPasswordPage());
 
       default:
-        const NoScreenFound();
+        return routeBuilder(const NoScreenFound());
     }
   }
 }
@@ -42,7 +38,7 @@ class NoScreenFound extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.backGroundColor,
       appBar: AppBar(
-        backgroundColor: AppColors.backGroundColor,
+        backgroundColor: AppColors.backGroundColorBottomNav,
         title: Text(
           "Screen not found!",
           style: fEncodeSansBold.copyWith(color: AppColors.primaryColor),
