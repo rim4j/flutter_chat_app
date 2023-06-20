@@ -10,6 +10,7 @@ import 'package:flutter_chat_app/features/user/presentation/cubit/auth/auth_cubi
 import 'package:flutter_chat_app/features/user/presentation/cubit/credential/credential_cubit.dart';
 import 'package:flutter_chat_app/features/user/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter_chat_app/features/user/presentation/widgets/form_container_widget.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -34,6 +35,10 @@ class _SignInPageState extends State<SignInPage> {
     return BlocConsumer<CredentialCubit, CredentialState>(
       listener: (context, credentialState) {
         if (credentialState is CredentialSuccess) {
+          BlocProvider.of<AuthCubit>(context).loggedIn();
+        }
+
+        if (credentialState is GoogleCredentialSuccess) {
           BlocProvider.of<AuthCubit>(context).loggedIn();
         }
 
@@ -175,20 +180,43 @@ class _SignInPageState extends State<SignInPage> {
             borderRadius: BorderRadius.circular(20),
           ),
         ),
-        onPressed: () {},
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.network(
-              IMAGES.googleNetworkIcon,
-              width: 20,
-            ),
-            sizeHor(15),
-            Text(
-              "Sign in with Google",
-              style: fEncodeSansBold.copyWith(color: AppColors.primaryColor),
-            ),
-          ],
+        onPressed: () {
+          BlocProvider.of<CredentialCubit>(context).googleAuthSubmit();
+        },
+        child: BlocConsumer<CredentialCubit, CredentialState>(
+          listener: (context, credentialState) {
+            if (credentialState is GoogleCredentialFailed) {
+              toast(
+                  message: "google sign in failed",
+                  backGroundColor: Colors.red);
+            }
+          },
+          builder: (context, credentialState) {
+            if (credentialState is GoogleCredentialLoading) {
+              return const SizedBox(
+                height: 50,
+                child: SpinKitThreeBounce(
+                  color: AppColors.primaryColor,
+                  size: 20,
+                ),
+              );
+            }
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.network(
+                  IMAGES.googleNetworkIcon,
+                  width: 20,
+                ),
+                sizeHor(15),
+                Text(
+                  "Sign in with Google",
+                  style:
+                      fEncodeSansBold.copyWith(color: AppColors.primaryColor),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

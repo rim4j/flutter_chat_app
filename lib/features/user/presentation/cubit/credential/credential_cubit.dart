@@ -63,14 +63,14 @@ class CredentialCubit extends Cubit<CredentialState> {
   }
 
   Future<void> googleAuthSubmit() async {
-    emit(CredentialLoading());
+    emit(GoogleCredentialLoading());
     try {
       await googleAuthUseCase();
-      emit(CredentialSuccess());
+      emit(GoogleCredentialSuccess());
     } on SocketException catch (_) {
-      emit(CredentialFailed());
+      emit(GoogleCredentialFailed());
     } catch (_) {
-      emit(CredentialFailed());
+      emit(GoogleCredentialFailed());
     }
   }
 }

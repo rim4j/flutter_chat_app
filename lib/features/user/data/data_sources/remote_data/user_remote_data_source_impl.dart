@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/core/constants/constants.dart';
-import 'package:flutter_chat_app/core/utils/custom_toast.dart';
 import 'package:flutter_chat_app/features/user/data/models/user_model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -55,7 +53,8 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
         userCollection.doc(uid).set(newUser);
       } else {
-        toast(message: 'user already exists', backGroundColor: Colors.red);
+        // toast(message: 'user already exists', backGroundColor: Colors.red);
+        // print("user already exists");
 
         return;
       }
@@ -100,8 +99,26 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
-  Future<void> googleAuth() {
-    throw UnimplementedError();
+  Future<void> googleAuth() async {
+    try {
+      final GoogleSignInAccount? account = await googleSignIn.signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await account!.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final information = (await auth.signInWithCredential(credential)).user;
+
+      getCreateCurrentUser(UserEntity(
+        name: information!.displayName,
+        email: information.email,
+        status: "",
+        profileUrl: information.photoURL,
+      ));
+    } catch (_) {}
   }
 
   @override

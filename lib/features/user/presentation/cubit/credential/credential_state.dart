@@ -23,3 +23,18 @@ class CredentialFailed extends CredentialState {
   @override
   List<Object?> get props => [];
 }
+
+class GoogleCredentialLoading extends CredentialState {
+  @override
+  List<Object?> get props => [];
+}
+
+class GoogleCredentialSuccess extends CredentialState {
+  @override
+  List<Object?> get props => [];
+}
+
+class GoogleCredentialFailed extends CredentialState {
+  @override
+  List<Object?> get props => [];
+}
