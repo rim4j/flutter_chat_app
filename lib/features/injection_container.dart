@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_chat_app/features/storage/storage_injection_container.dart';
 import 'package:flutter_chat_app/features/user/user_injection_container.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -20,4 +21,5 @@ Future<void> init() async {
   locator.registerLazySingleton(() => storage);
 
   await userInjectionContainer();
+  await storageInjectionContainer();
 }

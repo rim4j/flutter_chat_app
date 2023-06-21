@@ -7,6 +7,8 @@ import 'package:flutter_chat_app/features/app/home/home_page.dart';
 import 'package:flutter_chat_app/features/injection_container.dart' as di;
 import 'package:flutter_chat_app/features/user/presentation/cubit/auth/auth_cubit.dart';
 import 'package:flutter_chat_app/features/user/presentation/cubit/credential/credential_cubit.dart';
+import 'package:flutter_chat_app/features/user/presentation/cubit/single_user/single_user_cubit.dart';
+import 'package:flutter_chat_app/features/user/presentation/cubit/user/user_cubit.dart';
 import 'package:flutter_chat_app/features/user/presentation/pages/sign_in_page.dart';
 
 void main() async {
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        //provide cubits
         BlocProvider<AuthCubit>(
           create: (context) => di.locator<AuthCubit>()..appStarted(),
         ),
@@ -33,6 +36,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<CredentialCubit>(
           create: (context) => di.locator<CredentialCubit>(),
+        ),
+        BlocProvider<SingleUserCubit>(
+          create: (context) => di.locator<SingleUserCubit>(),
+        ),
+        BlocProvider<UserCubit>(
+          create: (context) => di.locator<UserCubit>(),
         ),
       ],
       child: MaterialApp(

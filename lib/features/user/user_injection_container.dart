@@ -16,6 +16,8 @@ import 'package:flutter_chat_app/features/user/domain/use_cases/sign_out_usecase
 import 'package:flutter_chat_app/features/user/domain/use_cases/sign_up_usecase.dart';
 import 'package:flutter_chat_app/features/user/presentation/cubit/auth/auth_cubit.dart';
 import 'package:flutter_chat_app/features/user/presentation/cubit/credential/credential_cubit.dart';
+import 'package:flutter_chat_app/features/user/presentation/cubit/single_user/single_user_cubit.dart';
+import 'package:flutter_chat_app/features/user/presentation/cubit/user/user_cubit.dart';
 
 Future<void> userInjectionContainer() async {
   //cubit
@@ -34,6 +36,18 @@ Future<void> userInjectionContainer() async {
       signInUseCase: locator(),
       forgetPasswordUseCase: locator(),
       googleAuthUseCase: locator(),
+    ),
+  );
+
+  locator.registerFactory<UserCubit>(
+    () => UserCubit(
+      getAllUsersUseCase: locator(),
+      getUpdateUserUseCase: locator(),
+    ),
+  );
+  locator.registerFactory<SingleUserCubit>(
+    () => SingleUserCubit(
+      getSingleUserUseCase: locator(),
     ),
   );
 
