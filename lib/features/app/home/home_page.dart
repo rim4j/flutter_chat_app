@@ -9,6 +9,7 @@ import 'package:flutter_chat_app/features/group/presentation/pages/group_page.da
 import 'package:flutter_chat_app/features/user/domain/entities/user_entity.dart';
 import 'package:flutter_chat_app/features/user/presentation/cubit/auth/auth_cubit.dart';
 import 'package:flutter_chat_app/features/user/presentation/cubit/single_user/single_user_cubit.dart';
+import 'package:flutter_chat_app/features/user/presentation/cubit/user/user_cubit.dart';
 import 'package:flutter_chat_app/features/user/presentation/pages/all_users_page.dart';
 import 'package:flutter_chat_app/features/user/presentation/pages/profile_page.dart';
 
@@ -28,15 +29,19 @@ class _HomePageState extends State<HomePage> {
   PageController pageController = PageController();
 
   List<Widget> pages = [
-    GroupPage(),
-    AllUsersPage(),
-    ProfilePage(),
+    const GroupPage(),
+    const AllUsersPage(),
+    const ProfilePage(),
   ];
 
   @override
   void initState() {
     BlocProvider.of<SingleUserCubit>(context)
         .getSingleUserProfile(user: UserEntity(uid: widget.uid));
+
+    BlocProvider.of<UserCubit>(context)
+        .getUsers(user: UserEntity(uid: widget.uid));
+
     super.initState();
   }
 

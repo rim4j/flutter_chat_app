@@ -50,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
             return const Center(
               child: SpinKitThreeBounce(
                 color: AppColors.blueColor,
-                size: 50,
+                size: 40,
               ),
             );
           }
