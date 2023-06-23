@@ -15,7 +15,7 @@ class CloudStorageRemoteDataSourceImpl implements CloudStorageRemoteDataSource {
   @override
   Future<String> uploadGroupImage({required File file}) async {
     final ref = storage.ref().child(
-          "${FirebaseCollectionsName.group}/${DateTime.now().millisecondsSinceEpoch}${getNameOnly(file.path)}",
+          "${FirebaseCollectionsName.groups}/${DateTime.now().millisecondsSinceEpoch}${getNameOnly(file.path)}",
         );
 
     final uploadTask = ref.putFile(file);

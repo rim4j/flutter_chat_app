@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_app/config/routes/on_generate_route.dart';
 import 'package:flutter_chat_app/core/blocs/tab_bar_cubit.dart/tab_bar_cubit.dart';
 import 'package:flutter_chat_app/features/app/home/home_page.dart';
+import 'package:flutter_chat_app/features/group/presentation/cubit/chat/chat_cubit.dart';
+import 'package:flutter_chat_app/features/group/presentation/cubit/group/group_cubit.dart';
 import 'package:flutter_chat_app/features/injection_container.dart' as di;
 import 'package:flutter_chat_app/features/user/presentation/cubit/auth/auth_cubit.dart';
 import 'package:flutter_chat_app/features/user/presentation/cubit/credential/credential_cubit.dart';
@@ -42,6 +44,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<UserCubit>(
           create: (context) => di.locator<UserCubit>(),
+        ),
+        BlocProvider<ChatCubit>(
+          create: (context) => di.locator<ChatCubit>(),
+        ),
+        BlocProvider<GroupCubit>(
+          create: (context) => di.locator<GroupCubit>(),
         ),
       ],
       child: MaterialApp(

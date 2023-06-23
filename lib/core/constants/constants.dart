@@ -16,7 +16,9 @@ class IMAGES {
 class FirebaseCollectionsName {
   static const users = "users";
   static const profile = "profile";
-  static const group = "group";
+  static const groups = "groups";
+  static const groupChatChannel = "groupChatChannel";
+  static const messages = "messages";
 }
 
 //route names
@@ -25,6 +27,8 @@ class PageConst {
   static const String signIn = "signIn";
   static const String home = "home";
   static const String forgetPassword = "forgetPassword";
+  static const String createGroup = "createGroup";
+  static const String singleChat = "singleChat";
 }
 
 Widget sizeVer(double height) {

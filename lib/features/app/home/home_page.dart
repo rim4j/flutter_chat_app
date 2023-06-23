@@ -5,6 +5,7 @@ import 'package:flutter_chat_app/config/theme/app_themes.dart';
 import 'package:flutter_chat_app/core/blocs/tab_bar_cubit.dart/tab_bar_cubit.dart';
 import 'package:flutter_chat_app/core/constants/constants.dart';
 import 'package:flutter_chat_app/core/widgets/custom_tab_bar/custom_tab_bar.dart';
+import 'package:flutter_chat_app/features/group/presentation/cubit/group/group_cubit.dart';
 import 'package:flutter_chat_app/features/group/presentation/pages/group_page.dart';
 import 'package:flutter_chat_app/features/user/domain/entities/user_entity.dart';
 import 'package:flutter_chat_app/features/user/presentation/cubit/auth/auth_cubit.dart';
@@ -28,11 +29,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   PageController pageController = PageController();
 
-  List<Widget> pages = [
-    const GroupPage(),
-    const AllUsersPage(),
-    const ProfilePage(),
-  ];
+  List<Widget> get pages => [
+        GroupPage(uid: widget.uid),
+        const AllUsersPage(),
+        const ProfilePage(),
+      ];
 
   @override
   void initState() {
@@ -41,6 +42,8 @@ class _HomePageState extends State<HomePage> {
 
     BlocProvider.of<UserCubit>(context)
         .getUsers(user: UserEntity(uid: widget.uid));
+
+    BlocProvider.of<GroupCubit>(context).getGroups();
 
     super.initState();
   }
