@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_app/config/theme/app_themes.dart';
 import 'package:flutter_chat_app/core/constants/constants.dart';
 import 'package:flutter_chat_app/core/utils/custom_toast.dart';
 import 'package:flutter_chat_app/core/widgets/custom_button.dart';
+import 'package:flutter_chat_app/features/user/presentation/cubit/credential/credential_cubit.dart';
 import 'package:flutter_chat_app/features/user/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter_chat_app/features/user/presentation/widgets/form_container_widget.dart';
 
@@ -70,6 +72,17 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
       return;
     }
 
-    print("email   ${_emailController.text}");
+    BlocProvider.of<CredentialCubit>(context)
+        .forgetPassword(email: _emailController.text)
+        .then((value) {
+      toast(
+          message: "Please check your email for reset password",
+          backGroundColor: Colors.green);
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        PageConst.signIn,
+        (route) => false,
+      );
+    });
   }
 }

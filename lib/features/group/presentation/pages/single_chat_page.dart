@@ -63,6 +63,21 @@ class _SingleChatPageState extends State<SingleChatPage> {
           if (chatState is ChatSuccess) {
             final List<TextMessageEntity> messages = chatState.messages;
 
+            if (messages.isEmpty) {
+              return Column(
+                children: [
+                  Expanded(
+                    child: Center(
+                      child: Text("No messages",
+                          style: fEncodeSansBold.copyWith(
+                              color: AppColors.primaryColor)),
+                    ),
+                  ),
+                  _sendMessageTextField(),
+                ],
+              );
+            }
+
             return Column(
               children: [
                 _messageList(messages),
