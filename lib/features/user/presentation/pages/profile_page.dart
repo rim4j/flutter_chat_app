@@ -88,12 +88,11 @@ class _ProfilePageState extends State<ProfilePage> {
         if (pickedFile != null) {
           _image = File(pickedFile.path);
         } else {
-          print('No image selected.');
+          return;
         }
       });
     } catch (e) {
       toast(message: "error $e");
-      print(e);
     }
   }
 
@@ -195,20 +194,24 @@ class _ProfilePageState extends State<ProfilePage> {
       setState(() {
         _loading = true;
       });
+
       locator<UploadImageProfileUseCase>().call(file: _image!).then(
         (imageUrl) {
-          BlocProvider.of<UserCubit>(context).getUpdateUser(
+          BlocProvider.of<UserCubit>(context)
+              .getUpdateUser(
             user: UserEntity(
               uid: uid,
               name: _nameController.text,
               status: _statusController.text,
               profileUrl: imageUrl,
             ),
-          );
-          toast(message: "updated profile", backGroundColor: Colors.green);
-          setState(() {
-            _loading = false;
-            _image = null;
+          )
+              .then((value) {
+            toast(message: "updated profile", backGroundColor: Colors.green);
+            setState(() {
+              _loading = false;
+              _image = null;
+            });
           });
         },
       );
